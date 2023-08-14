@@ -1,0 +1,111 @@
+.App {
+  text-align: center;
+}
+
+body
+{
+  background-color: #282c34;
+}
+
+#main-page
+{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#main-content-wrapper
+{
+  flex-grow:1;
+  display:flex;
+  flex-direction:column;
+  padding-top:30px;
+}
+
+.App-header {
+
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@mixin theButton
+{
+  color:#fff;
+  text-decoration: none;
+  display:inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background:#000;
+  transition: 0.55s;
+  &:hover{
+    background:#222;
+  }
+}
+
+.the-button
+{
+  @include theButton;
+}
+
+.App
+{
+  display: flex;
+  flex-direction:1;
+  p
+  {
+    margin-bottom:15px;
+    margin-top:0;
+  }
+}
+
+#users-table
+{
+  border:1px solid #aaa;
+  border-collapse: collapse;
+  margin-top:20px;
+  td,th
+  {
+    padding:10px;
+    border:1px solid #aaa;
+  }
+}
+
+#main-menu
+{
+  text-align: center;
+  list-style: none;
+  display:block;
+  li
+  {
+    display:inline-block;
+    margin: 0 20px;
+  }
+  margin: 0;
+    padding: 0;
+    padding-top:30px;
+  a
+  {
+    color:#fff;
+    text-decoration:none;
+    display:inline-block;
+    &:hover
+    {
+      color:#aaa;
+    }
+  }
+}
+
+#checklist
+{
+  text-align: center;
+  color:#fff;
+}
