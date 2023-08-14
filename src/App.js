@@ -4,8 +4,16 @@ import Checklist from "./pages/Checklist";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
+
+  var origin = window.location.origin;
+  var base = '/react-test/';
+  if(origin==='http://localhost:3000')
+  {
+    base = '/';
+  }
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={base}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
