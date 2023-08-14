@@ -1,11 +1,16 @@
 import React, { Component,useState,useEffect } from 'react';
 
+var firstLoad = false;
+
 function Checklist() {
 
   const [checklist, setChecklist] = useState([]);
+  const [checklistBody, setChecklistBody] = useState([]);
 
-  var setChecklistHtml = ()=>
+
+  function setChecklistHtml()
   {
+
     if(!checklist)
     {
       return;
@@ -15,31 +20,57 @@ function Checklist() {
       return;
     }
 
-    return (<div>{checklist.map((object, i) => <div class="one-checklist">{object.text}</div>)}</div>);
+    var items = [];
+
+    for(var i=0;i<checklist.length;i++)
+    {
+      var className = 'one-checklist';
+      if(checklist[i].checked==='true')
+      {
+        className+=' checked';
+      }
+        items.push(<div class={className}>{checklist[i].text}</div>);
+    }
+    return (<div>{items}</div>);
   }
 
-  const getChecklist = ()=>
+  function getChecklist()
   {
     fetch("https://cezsiw.dreamhosters.com/react_api/wp-json/react_api/v1/checklist/", {cache: "no-store"})
       .then(res => res.json())
       .then(
         (result) => {
-          setChecklist(result);
+
+
+          if(typeof result !== 'undefined')
+          {
+              setChecklist(result);
+          }
+
         },
         (error) => {
           console.log(error);
         }
       );
   }
+  console.log(checklist);
 
   useEffect(() => {
-    setChecklist(setChecklistHtml());
+    setChecklistBody(setChecklistHtml());
   }, [checklist]);
+
+  if(!checklist || typeof checklist ==='undefined' || checklist.length===0)
+  {
+      getChecklist();
+  }
+
+
+
 
   return (
       <div id="checklist">
       <p>Checklist</p>
-      {checklist}
+      {checklistBody}
       </div>
     );
   }

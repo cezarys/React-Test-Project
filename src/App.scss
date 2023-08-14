@@ -108,4 +108,17 @@ body
 {
   text-align: center;
   color:#fff;
+  .one-checklist
+  {
+    width:100%;
+    padding: 10px;
+    max-width: 600px;
+    cursor:pointer;
+    margin:auto;
+    margin-bottom:10px;
+    &.checked
+    {
+      background:#666;
+    }
+  }
 }
