@@ -1,4 +1,5 @@
 import React, { Component,useState,useEffect } from 'react';
+import ChecklistItem from '../components/ChecklistItem';
 
 var firstLoad = false;
 
@@ -29,7 +30,7 @@ function Checklist() {
       {
         className+=' checked';
       }
-        items.push(<div class={className}>{checklist[i].text}</div>);
+        items.push(<ChecklistItem index={i} class={className} text={checklist[i].text}></ChecklistItem>);
     }
     return (<div>{items}</div>);
   }
