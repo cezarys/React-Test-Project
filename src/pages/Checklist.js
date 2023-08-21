@@ -46,6 +46,7 @@ function Checklist() {
           if(typeof result !== 'undefined')
           {
               setChecklist(result);
+              setNewItemValue('');setFormClass('')
           }
 
         },
@@ -54,7 +55,7 @@ function Checklist() {
         }
       );
   }
-  console.log(checklist);
+
 
   useEffect(() => {
     setChecklistBody(setChecklistHtml());
@@ -66,12 +67,43 @@ function Checklist() {
   }
 
 
+  function handleSubmit(e)
+  {
+    e.preventDefault();
+    setFormClass('active');
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: newItemValue })
+    };
 
+    fetch('https://cezsiw.dreamhosters.com/react_api/wp-json/react_api/v1/checklist/', requestOptions).then(response => response.json())
+    .then(data => {getChecklist();} );
+
+
+  }
+
+  function handleNewItemChange(e)
+  {
+    setNewItemValue(e.target.value);
+
+  }
+
+  const [newItemValue, setNewItemValue] = useState('');
+  const [formClass, setFormClass] = useState('');
 
   return (
       <div id="checklist">
       <p>Checklist</p>
       {checklistBody}
+      <form class={formClass} onSubmit={handleSubmit} action="#" id="add-new-item-form" method="post">
+        <p>
+          <input type="text" onChange={handleNewItemChange} value={newItemValue} placeholder="New item..." required id="new-item" />
+        </p>
+        <p>
+          <input type="submit" value="Add New Item" />
+        </p>
+      </form>
       </div>
     );
   }

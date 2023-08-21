@@ -122,3 +122,40 @@ body
     }
   }
 }
+
+*
+{
+  box-sizing: border-box;;
+}
+
+#add-new-item-form
+{
+  width:100%;
+  max-width:400px;
+  margin: auto;
+  input
+  {
+    height:40px;
+    width:100%;
+  }
+
+  &.active
+  {
+    opacity:0.5;
+  }
+
+input[type="submit"]
+{
+
+}
+
+input[type="text"]
+{
+  background:#000;
+  border: 0;
+  outline: 0;
+  color:#fff;
+  padding: 0 15px;
+}
+
+}
