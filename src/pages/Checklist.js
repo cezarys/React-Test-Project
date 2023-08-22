@@ -7,7 +7,16 @@ function Checklist() {
 
   const [checklist, setChecklist] = useState([]);
   const [checklistBody, setChecklistBody] = useState([]);
+    var items = [];
 
+  function removeItem(index)
+  {
+    getChecklist();
+    /*var c = checklist;
+    c.splice(index,1);
+    setChecklist(c);
+    console.log(c);*/
+  }
 
   function setChecklistHtml()
   {
@@ -21,7 +30,7 @@ function Checklist() {
       return;
     }
 
-    var items = [];
+
 
     for(var i=0;i<checklist.length;i++)
     {
@@ -30,13 +39,16 @@ function Checklist() {
       {
         className+=' checked';
       }
-        items.push(<ChecklistItem index={i} class={className} text={checklist[i].text}></ChecklistItem>);
+      console.log(className);
+
+        items.push(<ChecklistItem removeItem={removeItem} getChecklist={getChecklist} key={i} index={i} class={className} text={checklist[i].text}></ChecklistItem>);
     }
     return (<div>{items}</div>);
   }
 
   function getChecklist()
   {
+    items = [];
     fetch("https://cezsiw.dreamhosters.com/react_api/wp-json/react_api/v1/checklist/", {cache: "no-store"})
       .then(res => res.json())
       .then(
@@ -46,7 +58,8 @@ function Checklist() {
           if(typeof result !== 'undefined')
           {
               setChecklist(result);
-              setNewItemValue('');setFormClass('')
+              setNewItemValue('');
+              setFormClass('')
           }
 
         },
@@ -58,8 +71,11 @@ function Checklist() {
 
 
   useEffect(() => {
+
     setChecklistBody(setChecklistHtml());
   }, [checklist]);
+
+
 
   if(!checklist || typeof checklist ==='undefined' || checklist.length===0)
   {

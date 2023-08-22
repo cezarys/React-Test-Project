@@ -116,9 +116,33 @@ body
     cursor:pointer;
     margin:auto;
     margin-bottom:10px;
+    position:relative;
+    .delete-item
+    {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      z-index: 3;
+      font-size: 14px;
+      text-decoration:none;
+      color:#f44;
+      background:#000;
+      border-radius:30px;
+      width:25px;
+      height:25px;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      line-height:0;
+    }
     &.checked
     {
       background:#666;
+    }
+    &.deleting
+    {
+      background:#933;
     }
   }
 }
